@@ -52,6 +52,77 @@ A string of exactly 16 lower-case hex-digits starting with `B` matching `/^B[0-9
 Each *batch* has a unique *batch_id*.
 
 
+#### Domain name
+
+Basic data type: string
+
+1. If the string is a single character, that character must be `.`.
+
+2. When the string is split at the `.` characters each component part (`label`)
+   must be 1 to 63 characters long. For any `IDN label` the length restriction is
+   for the [A-label][RFC 5890#2.3.2.1] shape of the label.
+
+3. The length of the string must not be greater than 254 characters
+   when the string ends with a trailing `.` character. The length restriction is
+   counted when any `IDN label` has been converted to its A-label shape.
+
+> Note: Currently there are no restrictions on what characters that are allowed.
+
+
+#### DS info
+
+Basic data type: object
+
+DS for [Delegation Signer] references a DNSKEY record in the delegated zone.
+
+Properties:
+* `"digest"`: A string, required. Either 40, 64 or 96 hexadecimal characters (case-insensitive).
+* `"algorithm"`: An non negative integer, required.
+* `"digtype"`: An non negative integer, required.
+* `"keytag"`: An non negative integer, required.
+
+
+#### IP address
+
+Basic data type: string
+
+This parameter is a string that is either
+ - a valid IPv4 address in [dot-decimal notation] ;
+ - a valid IPv6 address in [recommended text format][RFC 5952] for IPv6 addresses.
+
+#### Language tag
+
+Basic data type: string
+
+A string matching `/^[a-z]{2}$/`.
+
+The set of valid *language tags* is further constrained by the
+[`LANGUAGE.locale`][LANGUAGE.locale] property.
+A *language tag* needs to match the language code of a *locale tag* in
+[`LANGUAGE.locale`][LANGUAGE.locale].
+
+
+##### Design
+
+The *language tag* values are intended to be [ISO 639-1] two-character language
+codes.
+
+##### Out-of-the box support
+
+A default installation will accept the following *language tags*:
+
+Language | Language tag
+---------|-------------
+Danish   | da
+English  | en
+Spanish  | es
+Finnish  | fi
+French   | fr
+Norwegian| nb
+Slovenian| sl
+Swedish  | sv
+
+
 #### Job id
 
 Basic data type: string
