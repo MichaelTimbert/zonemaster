@@ -1,5 +1,5 @@
 
-## Experimental API methods
+# Experimental API
 
 There are also some experimental API methods documented only by name:
 
@@ -26,13 +26,30 @@ There are also some experimental API methods documented only by name:
 job is the new test
 
 
-### Data types
+## Table of contents
+
+## Purpose
+
+## Protocol
+
+### Deviations from JSON-RPC 2.0
+
+### Notes on the JSON-RPC 2.0 implementation
+
+## Request handling
+
+## Error reporting
+
+## Privilege levels
+
+
+## Data types
 
 Here there is some change for datatype
 
 
 
-#### API key
+### API key
 
 Basic data type: string
 
@@ -43,7 +60,7 @@ I.e. a string matching `/^[a-zA-Z0-9-_]{1,512}$/`.
 Represents the password of an authenticated account (see *[Privilege levels]*)
 
 
-#### Batch id
+### Batch id
 
 Basic data type: string
 
@@ -52,7 +69,7 @@ A string of exactly 16 lower-case hex-digits starting with `B` matching `/^B[0-9
 Each *batch* has a unique *batch_id*.
 
 
-#### Domain name
+### Domain name
 
 Basic data type: string
 
@@ -69,7 +86,7 @@ Basic data type: string
 > Note: Currently there are no restrictions on what characters that are allowed.
 
 
-#### DS info
+### DS info
 
 Basic data type: object
 
@@ -82,7 +99,7 @@ Properties:
 * `"keytag"`: An non negative integer, required.
 
 
-#### IP address
+### IP address
 
 Basic data type: string
 
@@ -90,7 +107,7 @@ This parameter is a string that is either
  - a valid IPv4 address in [dot-decimal notation] ;
  - a valid IPv6 address in [recommended text format][RFC 5952] for IPv6 addresses.
 
-#### Language tag
+### Language tag
 
 Basic data type: string
 
@@ -102,12 +119,12 @@ A *language tag* needs to match the language code of a *locale tag* in
 [`LANGUAGE.locale`][LANGUAGE.locale].
 
 
-##### Design
+#### Design
 
 The *language tag* values are intended to be [ISO 639-1] two-character language
 codes.
 
-##### Out-of-the box support
+#### Out-of-the box support
 
 A default installation will accept the following *language tags*:
 
@@ -123,7 +140,7 @@ Slovenian| sl
 Swedish  | sv
 
 
-#### Job id
+### Job id
 
 Basic data type: string
 
@@ -132,7 +149,7 @@ A string of exactly 16 lower-case hex-digits starting with `J` matching `/^J[0-9
 Each *job* has a unique *job_id*.
 
 
-#### Job result
+### Job result
 
 Basic data type: object
 
@@ -150,14 +167,14 @@ This key is added when the module name is `"NAMESERVER"`.
 
 
 
-#### Status
+### Status
 
 State of a job or a batch, can be one of these five:
 `waiting`, `running`, `completed`, `cancelled` or `crashed`.
 
-### API methodes
+## API methodes
 
-#### `system_versions`
+### `system_versions`
 
 Replaces: version_info
 
@@ -197,7 +214,7 @@ An object with the following properties:
 * "api_version": A string. The version of the current API.
 
 
-#### `conf_profiles`
+### `conf_profiles`
 
 Replaces: `profiles_names`
 
@@ -227,7 +244,7 @@ Replaces: `profiles_names`
 An array of [*Profile names*][Profile name] in lower case. `"default"` is always included.
 
 
-#### `conf_languages`
+### `conf_languages`
 
 Replaces: `get_language_tags`
 Returns the set of valid [*language tags*][Language tag].
@@ -259,7 +276,7 @@ Returns the set of valid [*language tags*][Language tag].
 An array of [*language tags*][Language tag]. It is never empty.
 
 
-#### `conf_backend`
+### `conf_backend`
 
 Exposes `age_reuse_previous_test` and other [backend config values](../../configuration/backend.md).  
 Related: [#1255](https://github.com/zonemaster/zonemaster-backend/issues/1255)
@@ -303,7 +320,7 @@ An object with the following properties:
 
 
 
-#### `lookup_address_records`
+### `lookup_address_records`
 
 Replaces: `get_host_by_name`
 
@@ -349,7 +366,7 @@ An `addresses` object containing separate IPv4 and IPv6 arrays. Each array may c
 > in this case replace request hostname by an array and encapsulate addresses response inside an object with `hostname` as key.
 
 
-#### `lookup_delegation_data`
+### `lookup_delegation_data`
 
 Replaces: `get_data_from_parent_zone`
 
@@ -449,7 +466,7 @@ An object with the following properties:
 ```
 
 
-#### `lookup_tld_url`
+### `lookup_tld_url`
 
 Returns a URL for the closest TLD to the domain name in the request, if available
 and matching policy of backend and policy of the TLD. The response can also be
@@ -647,7 +664,7 @@ Example 2 of response:
 ```
 
 
-#### `job_create`
+### `job_create`
 
 Enqueues a new job and returns the job id of the job.
 
@@ -718,7 +735,7 @@ An object with the following properties:
 * `"queue"`: A [*queue*][Queue]. (default: `0`) ###TODO: explain###
 
 
-#### `job_status`
+### `job_status`
 
 
 Reports on the progress of a *job*.
@@ -759,7 +776,7 @@ Example response:
 * "progress": pourcentage of progression for the test.
 
 
-#### `job_results`
+### `job_results`
 
 
 Return all [*job result*][job result] objects of a *test*, with *messages* in the requested language as selected by the [*language tag*][Language tag].
@@ -834,7 +851,7 @@ Example response:
 > TODO: WHAT if job is not terminated ? 
 
 
-#### `job_params`
+### `job_params`
 
 Replaces: `get_test_params`
 
@@ -866,7 +883,7 @@ Replaces: `get_test_params`
 ```
 
 
-#### `domain_history` 
+### `domain_history` 
 
 Returns a list of completed *jobs* for a domain.
 
@@ -968,7 +985,7 @@ An object with the following properties:
 
 
 
-#### `batch_create`
+### `batch_create`
 
 Replaces: `add_batch_job`  
 Related: [#1153](https://github.com/zonemaster/zonemaster-backend/issues/1153), [#1154](https://github.com/zonemaster/zonemaster-backend/issues/1154)
@@ -1016,7 +1033,7 @@ If `api_key` is not provided, anonymous batch feature is used (if `anonymous_bat
 * limit exceeded 
 * no anonymous_batch_enabled
 
-#### `batch_status`
+### `batch_status`
 
 
 https://github.com/zonemaster/zonemaster-backend/issues/1156
@@ -1073,7 +1090,7 @@ https://github.com/zonemaster/zonemaster-backend/issues/1156
 }
 ```
 
-#### `batch_domains`
+### `batch_domains`
 
 https://github.com/zonemaster/zonemaster-backend/issues/1151
 
@@ -1115,7 +1132,7 @@ quesqu'on veux ?
 }
 ```
 
-#### `batch_cancel`
+### `batch_cancel`
 
 
 New endpoint. Cancels a batch and all its unstarted jobs.  
@@ -1152,7 +1169,7 @@ and if we can list batch it s not enough security
 
 only authenticated batch can be cancelled.
 
-#### `batch_list`
+### `batch_list`
 
 https://github.com/zonemaster/zonemaster/issues/1430
 
@@ -1202,7 +1219,7 @@ listing batchs include security concerne,
 ```
 #TODO# list des batches n'est pas consistant avec la liste des batch_jobs 
 
-#### `message_explanation`
+### `message_explanation`
 
 **Request:**
 ```json
@@ -1236,7 +1253,7 @@ listing batchs include security concerne,
 ```
 
 
-#### `statistics_overview`
+### `statistics_overview`
 
 is this precomputed statistique or can we ask for more complicated statistique ?
 
