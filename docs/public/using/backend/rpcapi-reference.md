@@ -1691,22 +1691,6 @@ If the `batch_id` is unrecognized the following error is returned:
 ```
 
 
-## Experimental API methods
-
-There are also some experimental API methods documented only by name:
-
-* system_versions
-* conf_profiles
-* conf_languages
-* lookup_address_records
-* lookup_delegation_data
-* job_create
-* job_status
-* job_results
-* job_params
-* domain_history
-* user_create
-* batch_create
 
 
 [API add_api_user]:                        #api-method-add_api_user

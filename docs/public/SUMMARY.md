@@ -43,6 +43,7 @@
         - [Using Zonemaster-Backend for batch testing](using/backend/Using-Zonemaster-Backend-for-batch-testing.md)
         - [Using Zonemaster-Backend Docker container](using/backend/Using-Zonemaster-Backend-Docker.md)
         - [RPCAPI Reference](using/backend/rpcapi-reference.md)
+        - [RPCAPI Reference Experimental](using/backend/rpcapi-reference-experimental.md)
         - [Telemetry](using/backend/telemetry.md)
     - [GUI](using/gui/README.md)
         - [API](using/gui/api.md)
