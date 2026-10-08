@@ -27,6 +27,7 @@
   * [Severity level](#severity-level)
   * [Test id](#test-id)
   * [Test result](#test-result)
+  * [Test state](#test-state)
   * [Timestamp](#timestamp)
   * [Username](#username)
 * [API methods](#api-methods)
@@ -339,6 +340,17 @@ Sometimes additional keys are present.
 * `"ns"`: a [*domain name*][Domain name]. The name server used by the *test module*.
 This key is added when the module name is `"NAMESERVER"`.
 
+### Test state
+
+Basic data type: string
+
+One of the strings :
+
+* `"waiting"`
+* `"running"`
+* `"completed"`
+* `"cancelled"`
+* `"crashed"`
 
 ### Timestamp
 
@@ -1689,7 +1701,64 @@ If the `batch_id` is unrecognized the following error is returned:
   }
 }
 ```
+### API method: `job_status`
 
+
+Reports on the progress of a *job*.
+
+Example request:
+
+*Valid syntax:*
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 5,
+  "method": "job_status",
+  "params": {"job_id": "c45a3f8256c4a155"}
+}
+```
+
+Example response:
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 5,
+  "result":{
+    "state":"completed",
+    "created_at":"2026-10-08T13:36:02Z",
+    "started_at":"2026-10-08T13:36:03Z",
+    "ended_at":"2026-10-08T13:36:20Z",
+    "progress":100}
+  }
+}
+```
+
+```json
+"result":{
+  "started_at":"2026-10-08T13:39:40Z",
+  "progress":3,
+  "state":"running",
+  "created_at":"2026-10-08T13:39:39Z"}
+}
+```
+
+#### `"params"`
+
+An object with the property:
+
+`"job_id"`: A [*test id*][Test id], required. The *test* to report on.
+
+
+#### `"result"`
+
+A [*progress percentage*][Progress percentage].
+
+A [*state*][Test state] of the test.
+
+One to three date:
+- "created_at": test creation date
+- "started_at": test start date
+- "ended_at": test end date
 
 ## Experimental API methods
 
@@ -1701,7 +1770,6 @@ There are also some experimental API methods documented only by name:
 * lookup_address_records
 * lookup_delegation_data
 * job_create
-* job_status
 * job_results
 * job_params
 * domain_history
@@ -1763,6 +1831,7 @@ There are also some experimental API methods documented only by name:
 [Test Case Identifiers]:                   https://github.com/zonemaster/zonemaster/blob/master/docs/internal/templates/specifications/tests/TestCaseIdentifierSpecification.md
 [Test id]:                                 #test-id
 [Test result]:                             #test-result
+[Test state]:                              #test-state
 [Timestamp]:                               #timestamp
 [TLD URL Specification]:                   ../../configuration/tld-url-specification.md
 [TLD URL Specification#det-of-url]:        ../../configuration/tld-url-specification.md#determination-of-url
