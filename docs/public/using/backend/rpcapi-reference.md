@@ -1706,7 +1706,7 @@ If the `batch_id` is unrecognized the following error is returned:
 ### API method: `job_status`
 
 
-Reports on the progress of a *job*.
+Reports on the progress of a *test* created by [start_domain_test].
 
 Example request:
 
@@ -1760,7 +1760,7 @@ An object with the property:
 Returns the [*progress percentage*][Progress percentage], [*state*][Test state]
 and [*timestamp*][Timestamp] for the specified job.
 
-Between one and three [*timestamp*][Timestamp] are returned, depending on the job status.
+Between one and three [*timestamps*][Timestamp] are returned, depending on the test status.
 - "created_at": The time in UTC at which the *test* was created.
 - "started_at": The time in UTC at which the *test* was started.
 - "ended_at": The time in UTC at which the *test* was finished.
