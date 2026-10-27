@@ -1725,12 +1725,12 @@ Example response:
 {
   "jsonrpc": "2.0",
   "id": 5,
-  "result":{
-    "state":"completed",
-    "created_at":"2026-10-08T13:36:02Z",
-    "started_at":"2026-10-08T13:36:03Z",
-    "ended_at":"2026-10-08T13:36:20Z",
-    "progress":100
+  "result": {
+    "state": "completed",
+    "created_at": "2026-10-08T13:36:02Z",
+    "started_at": "2026-10-08T13:36:03Z",
+    "ended_at": "2026-10-08T13:36:20Z",
+    "progress": 100
   }
 }
 ```
@@ -1739,11 +1739,11 @@ Example response:
 {
   "jsonrpc": "2.0",
   "id": 5,
-  "result":{
-    "started_at":"2026-10-08T13:39:40Z",
-    "progress":3,
-    "state":"running",
-    "created_at":"2026-10-08T13:39:39Z"
+  "result": {
+    "started_at": "2026-10-08T13:39:40Z",
+    "progress": 3,
+    "state": "running",
+    "created_at": "2026-10-08T13:39:39Z"
   }
 }
 ```
